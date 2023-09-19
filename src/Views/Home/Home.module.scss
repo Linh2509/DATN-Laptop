@@ -1,0 +1,185 @@
+.cover-img {
+    object-fit: cover;
+    width: 100%;
+}
+
+.copybody{
+    font-family: "Roboto", sans-serif;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    text-rendering: optimizespeed;
+    color: #212121;
+
+    &:hover{
+        color: #212121;
+    }
+}
+
+.logo-card {
+    width: 14px;
+}
+
+.space-logo {
+    margin-right: 9px;
+    margin-bottom: 7px;
+}
+
+.wrapper {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    background-color: #f8f9fa;
+}
+
+.container {
+    width: 1140px;
+}
+
+.section001 {
+    margin-top: 5rem;
+    display: flex;
+}
+
+.section002 {
+    display: flex;
+
+    .layout-section002 {
+        display: flex;
+        background-color: #fff;
+        background-clip: border-box;
+        box-shadow: 0 0 3px 0 #dee2e6;
+        border-radius: 6px;
+        width: 100%;
+
+        .card-grid {
+            .grid-container {
+                display: grid;
+                grid-template-columns: auto auto auto;
+
+                .grid-item {
+                    height: 250px;
+                    padding: 20px;
+                    margin-bottom: 330px;
+
+                    .layout-card {
+                        box-shadow: 0 0 3px 0 #dee2e6;
+                        border-radius: 10px;
+
+                        &:hover {
+                            transition: ease-in 0.5s;
+                            transform: scale(1.1);
+                        }
+
+                        .top-card {
+                            overflow: hidden;
+                            padding: 9px 10px 0;
+                            border-bottom: 1px solid #cdc6c6;
+
+                            .link-card {
+                                text-decoration: none;
+
+                                .img-card {
+                                    height: 200px;
+                                    width: 100%;
+                                    cursor: pointer;
+
+
+                                }
+                            }
+                        }
+
+                        .mid-card {
+                            padding: 9px 10px 0;
+                            height: 150px;
+
+                            .sale-card {
+                                display: flex;
+                                justify-content: space-between;
+                                margin-bottom: 10px;
+
+                                .installment {
+                                    min-width: 100px;
+                                    background-color: #ea9d02;
+                                    border-radius: 25px;
+                                    color: #fff;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    font-size: 14px;
+                                }
+
+                                .discount {
+                                    min-width: 150px;
+                                    background-color: #cb1c22;
+                                    border-radius: 25px;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    font-size: 14px;
+                                    color: #fff;
+                                }
+                            }
+
+                            .card-name {
+                                margin-bottom: 10px;
+                                min-height: 50px;
+
+                                .name {
+                                    font-weight: bold;
+                                    color: #000;
+                                }
+                            }
+
+                            .price-card {
+                                display: flex;
+                                justify-content: space-between;
+                                margin-bottom: 10px;
+
+                                .new-price {
+                                    min-width: 130px;
+                                    border-radius: 25px;
+                                    background-color: #cb1c22;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    color: #fff;
+                                }
+
+                                .old-price {
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    color: #c2c2c2;
+                                    text-decoration: line-through;
+                                }
+                            }
+                        }
+
+                        .bot-card {
+                            background: #f8f9fa;
+                            padding: 9px 10px 0;
+                            padding-top: 20px;
+                            border-radius: 6px;
+                            position: relative;
+                            height: 150px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.section003 {
+    margin-top: 5rem;
+    display: flex;
+    background-color: #cb1c22;
+    justify-content: center;
+    align-items: center;
+
+    .title-sec3 {
+        font-size: 30px;
+        color: #fff;
+        margin-bottom: 0;
+    }
+}
