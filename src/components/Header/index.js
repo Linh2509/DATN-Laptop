@@ -1,18 +1,30 @@
 import classNames from "classnames/bind";
 import styles from "./Header.module.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/Logo.png";
 import searchLogo from "../../assets/Search.png";
 import cartLogo from "../../assets/Cart.png";
 import userLogo from "../../assets/User.png";
 import "reactjs-popup/dist/index.css";
 import Popup from "reactjs-popup";
+import Cookies from "js-cookie";
 
 const cx = classNames.bind(styles);
 
 function Header() {
+  const navigate = useNavigate();
+  const userCookie = Cookies.get("userId");
+
   const handleSubmit = (e) => {
     e.preventDefault();
+  };
+
+  const checkLogin = () => {
+    if (userCookie === undefined) {
+      navigate("/login");
+    } else {
+      navigate(`/cart/${userCookie}`);
+    }
   };
 
   return (
@@ -37,9 +49,9 @@ function Header() {
                 </button>
               </div>
               <div className={cx("cart")}>
-                <Link to="/cart">
+                <button onClick={checkLogin}>
                   <img className={cx("cart-logo")} src={cartLogo} alt="" />
-                </Link>
+                </button>
               </div>
               <div className={cx("user")}>
                 <img className={cx("user-logo")} src={userLogo} alt="" />

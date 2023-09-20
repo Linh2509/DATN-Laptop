@@ -1,6 +1,6 @@
 import classNames from "classnames/bind";
 import styles from "./Cart.module.scss";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 
 import { app, database } from "../../firebaseConfig.js";
@@ -8,6 +8,7 @@ import {
   getFirestore,
   collection,
   onSnapshot,
+  documentId,
   query,
   where,
   doc,
@@ -20,15 +21,17 @@ import {
 } from "firebase/firestore";
 
 const cx = classNames.bind(styles);
+const firestore = getFirestore(app);
 
 function Cart() {
   const { id } = useParams();
   const [cart, setCart] = useState([]);
+  const navigate = useNavigate();
 
   const collectionCart = collection(database, "cart");
   const productQuery = query(collectionCart, where("userID", "==", id));
 
-  console.log(id);
+  // console.log(id);
 
   useEffect(() => {
     GetData();
@@ -89,65 +92,73 @@ function Cart() {
     return acc + itemTotal;
   }, 0);
 
-  // const clearCartByUserID = async (id) => {
-  //   try {
-  //     // Lấy danh sách các bản ghi thỏa mãn truy vấn
-  //     const snapshot = await getDocs(productQuery);
+  const getDocumentIdsByUserID = async () => {
+    const productQuery = query(collectionCart, where("userID", "==", id));
 
-  //     // Lặp qua từng bản ghi và xóa chúng
-  //     snapshot.forEach(async (doc) => {
-  //       const cartDocRef = doc(collectionCart, doc.id);
-  //       await deleteDoc(cartDocRef);
-  //       console.log(`Đã xóa cart với ID: ${doc.id}`);
-  //     });
+    try {
+      const snapshot = await getDocs(productQuery);
+      const documentIds = snapshot.docs.map((doc) => doc.id);
+      return documentIds;
+    } catch (err) {
+      console.error("Error getting documents: ", err);
+      return [];
+    }
+  };
 
-  //     console.log("Đã xóa dữ liệu của Cart thành công");
-  //   } catch (error) {
-  //     console.error("Lỗi khi xóa dữ liệu của Cart:", error);
-  //   }
-  // };
+  const clearCartByDocumentIds = async (documentIds) => {
+    try {
+      documentIds.forEach(async (docId) => {
+        const cartDocRef = doc(collectionCart, docId);
+        await deleteDoc(cartDocRef);
+        console.log(`Đã xóa cart với ID: ${doc.id}`);
+      });
 
-  // const clearCartUser = async (id) => {
-  //   const firestore = getFirestore();
-  //   const collectionRef = collection(firestore, "cart", id);
-
-  //   const snapshot = await getDocs(collectionRef);
-
-  //   snapshot.forEach((doc) => {
-  //     deleteDoc(doc(collectionRef, doc.id))
-  //       .then(() => {
-  //         console.log(`Đã xóa tài liệu ${doc.id} thành công`);
-  //       })
-  //       .catch((error) => {
-  //         console.error(`Lỗi khi xóa tài liệu ${doc.id}:`, error);
-  //       });
-  //   });
-  // };
+      console.log(`Đã xóa cart với ID: ${doc.id}`);
+      console.log("Đã xóa các tài liệu trong giỏ hàng thành công");
+    } catch (error) {
+      console.error("Lỗi khi xóa tài liệu trong giỏ hàng:", error);
+    }
+  };
 
   const handlePayment = async () => {
     try {
+      const documentIds = await getDocumentIdsByUserID();
       // Tạo một bản ghi mới trong bảng "order"
-      const orderRef = await addDoc(collection(database, "order"), {
+      const orderRef = await addDoc(collection(firestore, "order"), {
         userID: id,
         products: cart.map((item) => ({
           productID: item.laptopDetails.id,
           quantity: item.quantity,
           totalPrice: item.laptopDetails.price * item.quantity,
         })),
+        total: totalAmount,
         timestamp: serverTimestamp(),
       });
 
       console.log("Đã tạo đơn hàng thành công:", orderRef.id);
 
-      await clearCartUser(id);
+      // Xóa giỏ hàng sau khi thanh toán
+      await clearCartByDocumentIds(documentIds);
 
-      // Nếu cần, sau khi tạo đơn hàng, bạn có thể xóa các sản phẩm từ giỏ hàng
-      // Chú ý: Bạn cần cập nhật lại giỏ hàng ở phía client để hiển thị đúng trạng thái
+      // Cập nhật lại giỏ hàng ở phía client để hiển thị đúng trạng thái
       setCart([]);
+      navigate(`/confirm/${orderRef.id}`);
     } catch (error) {
       console.error("Lỗi khi tạo đơn hàng:", error);
     }
   };
+
+  if (cart.length < 1) {
+    return (
+      <div className={cx("wrapper")}>
+        <p>Giỏ hàng của bạn đang trống</p>
+
+        <Link to="/">
+          <p>Quay lại mua hàng</p>
+        </Link>
+      </div>
+    );
+  }
 
   return (
     <div className={cx("wrapper")}>

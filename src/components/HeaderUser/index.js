@@ -85,6 +85,14 @@ function HeaderUser({ logout }) {
                       <Link className={cx("text")}>User Information</Link>
                     </div>
                     <div>
+                      <Link
+                        to={`/order/${userIDCookie}`}
+                        className={cx("text")}
+                      >
+                        Order
+                      </Link>
+                    </div>
+                    <div>
                       <button onClick={logout} className={cx("text")}>
                         Logout
                       </button>

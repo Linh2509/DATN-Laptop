@@ -12,6 +12,7 @@ import Users from "./Views/Users";
 import Storaged from "./Views/Test/Storaged";
 import Admin from "./Views/Admin";
 import SearchProduct from "./Views/SearchProduct";
+import Order from "./Views/Order";
 
 const router = createBrowserRouter([
   {
@@ -27,8 +28,12 @@ const router = createBrowserRouter([
         element: <Cart />,
       },
       {
-        path: "/confirm",
+        path: "/confirm/:id",
         element: <Confirm />,
+      },
+      {
+        path: "/order/:id",
+        element: <Order />,
       },
       {
         path: "/product/:id",
