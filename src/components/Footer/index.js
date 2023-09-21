@@ -10,7 +10,7 @@ function Footer() {
       <section className="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
         {/* Left */}
         <div className="me-5 d-none d-lg-block">
-          <span>Get connected with us on social networks:</span>
+          <span>Hãy kết nối với chúng tôi trên mạng xã hội</span>
         </div>
 
         {/* Right */}
@@ -42,66 +42,68 @@ function Footer() {
               <h6 className="text-uppercase fw-bold mb-4">
                 <i className="fas fa-gem me-3"></i>Laptop Linh
               </h6>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+              <p>Luôn mang tới những sản phẩm rẻ, chất lượng nhất và uy tín</p>
             </div>
 
             <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-              <h6 className="text-uppercase fw-bold mb-4">Product</h6>
+              <h6 className="text-uppercase fw-bold mb-4">Sản phẩm</h6>
               <p>
                 <a href="#!" className="text-reset">
-                  Angular
+                  ASUS
                 </a>
               </p>
               <p>
                 <a href="#!" className="text-reset">
-                  React
+                  MacBook
                 </a>
               </p>
               <p>
                 <a href="#!" className="text-reset">
-                  Vue
+                  Dell
                 </a>
               </p>
               <p>
                 <a href="#!" className="text-reset">
-                  Laravel
+                  HP
                 </a>
               </p>
             </div>
 
             <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-              <h6 className="text-uppercase fw-bold mb-4">Useful links</h6>
+              <h6 className="text-uppercase fw-bold mb-4">
+                Đường dẫn hữu dụng
+              </h6>
               <p>
                 <a href="#!" className="text-reset">
-                  Pricing
+                  Trang chủ
                 </a>
               </p>
               <p>
                 <a href="#!" className="text-reset">
-                  Settings
+                  Hàng bán chạy
                 </a>
               </p>
               <p>
                 <a href="#!" className="text-reset">
-                  Orders
+                  Giỏ hàng
                 </a>
               </p>
               <p>
                 <a href="#!" className="text-reset">
-                  Help
+                  Đơn hàng
                 </a>
               </p>
             </div>
 
             <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-              <h6 className="text-uppercase fw-bold mb-4">Contact</h6>
+              <h6 className="text-uppercase fw-bold mb-4">Liên hệ</h6>
               <p>
                 <i className="fas fa-home me-3"></i> Phenikaa University, Hà
                 Đông, Hà Nội
               </p>
               <p>
                 <i className="fas fa-envelope me-3"></i>
-                info@example.com
+                linh@gmail.com
               </p>
               <p>
                 <i className="fas fa-phone me-3"></i> + 01 234 567 88
@@ -116,9 +118,12 @@ function Footer() {
 
       <div className={cx("background")}>
         <div className="text-center p-4">
-          © 2021 Copyright:
-          <a className="text-reset fw-bold" href="https://mdbootstrap.com/">
-            MDBootstrap.com
+          ©2023 Bản quyền:
+          <a
+            className="text-reset fw-bold"
+            href="https://www.facebook.com/vietlinh1604"
+          >
+            &nbsp; Phan Viet Linh
           </a>
         </div>
       </div>

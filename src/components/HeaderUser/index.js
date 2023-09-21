@@ -93,6 +93,14 @@ function HeaderUser({ logout }) {
                       </Link>
                     </div>
                     <div>
+                      <Link
+                        to={`/historyOrder/${userIDCookie}`}
+                        className={cx("text")}
+                      >
+                        Lịch sử đặt hàng
+                      </Link>
+                    </div>
+                    <div>
                       <button onClick={logout} className={cx("text")}>
                         Đăng xuất
                       </button>

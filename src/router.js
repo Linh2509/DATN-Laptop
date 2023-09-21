@@ -13,6 +13,7 @@ import Storaged from "./Views/Test/Storaged";
 import Admin from "./Views/Admin";
 import SearchProduct from "./Views/SearchProduct";
 import Order from "./Views/Order";
+import HistoryOrder from "./Views/HistoryOrder";
 
 const router = createBrowserRouter([
   {
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
       {
         path: "/users",
         element: <Users />,
+      },
+      {
+        path: "/historyOrder/:id",
+        element: <HistoryOrder />,
       },
       {
         path: "/admin",
