@@ -55,11 +55,11 @@ function Header() {
               </div>
               <div className={cx("user")}>
                 <img className={cx("user-logo")} src={userLogo} alt="" />
-                <Link to="/login">Login</Link>
+                <Link to="/login">Đăng nhập</Link>
               </div>
             </div>
             <nav className={cx("navi")}>
-              <Popup trigger={<p className={cx("text")}>Laptop brand</p>}>
+              <Popup trigger={<p className={cx("text")}>Hãng Laptop</p>}>
                 <div>
                   <Link className={cx("text")}>MacBook</Link>
                 </div>
@@ -104,7 +104,7 @@ function Header() {
                 </div>
               </Popup>
 
-              <Popup trigger={<p className={cx("text")}>Price</p>}>
+              <Popup trigger={<p className={cx("text")}>Giá</p>}>
                 <div>
                   <Link className={cx("text")}>Dưới 10 triệu</Link>
                 </div>
@@ -122,7 +122,7 @@ function Header() {
                 </div>
               </Popup>
 
-              <Popup trigger={<p className={cx("text")}>CPU</p>}>
+              <Popup trigger={<p className={cx("text")}>Bộ xử lý</p>}>
                 <div>
                   <Link className={cx("text")}>Intel celeron</Link>
                 </div>
@@ -152,7 +152,7 @@ function Header() {
                 </div>
               </Popup>
 
-              <Popup trigger={<p className={cx("text", "hidden")}>Monitor</p>}>
+              <Popup trigger={<p className={cx("text", "hidden")}>Màn hình</p>}>
                 <div>
                   <Link className={cx("text")}>Khoảng 13 inch</Link>
                 </div>
@@ -164,7 +164,7 @@ function Header() {
                 </div>
               </Popup>
 
-              <Popup trigger={<p className={cx("text")}>Ram</p>}>
+              <Popup trigger={<p className={cx("text")}>Bộ nhớ tạm</p>}>
                 <div>
                   <Link className={cx("text")}>4GB</Link>
                 </div>
@@ -179,7 +179,7 @@ function Header() {
                 </div>
               </Popup>
 
-              <Popup trigger={<p className={cx("text")}>Graphics</p>}>
+              <Popup trigger={<p className={cx("text")}>Đồ họa</p>}>
                 <div>
                   <Link className={cx("text")}>NVIDIA GeForce Series</Link>
                 </div>
@@ -191,7 +191,7 @@ function Header() {
                 </div>
               </Popup>
 
-              <Popup trigger={<p className={cx("text", "hidden")}>Hardware</p>}>
+              <Popup trigger={<p className={cx("text", "hidden")}>Ổ cứng</p>}>
                 <div>
                   <Link className={cx("text")}>SSD 128GB</Link>
                 </div>
@@ -208,7 +208,7 @@ function Header() {
 
               <Popup
                 trigger={
-                  <p className={cx("text", "hidden")}>Special features</p>
+                  <p className={cx("text", "hidden")}>Tính năng đặc biệt</p>
                 }
               >
                 <div>

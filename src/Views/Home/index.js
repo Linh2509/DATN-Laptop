@@ -40,7 +40,7 @@ function Home() {
   return (
     <div className={cx("wrapper")}>
       {loading ? (
-        <p>Loading data...</p>
+        <p>Đang tải dữ liệu...</p>
       ) : (
         <div className={cx("container")}>
           <div className={cx("section001")}>
@@ -52,7 +52,7 @@ function Home() {
           </div>
 
           <div className={cx("section003")}>
-            <p className={cx("title-sec3")}>Best saler</p>
+            <p className={cx("title-sec3")}>Sản phẩm được mua nhiều nhất</p>
           </div>
 
           <div className={cx("section002")}>
@@ -174,7 +174,7 @@ function Home() {
                       </Link>
                     </div>
                   ))}
-                  <div className={cx("grid-item")}>
+                  <div className={cx("grid-item", "opa0")}>
                     <div className={cx("layout-card")}>
                       <div className={cx("top-card")}>
                         <Link to="/product" className={cx("link-card")}>
@@ -274,7 +274,7 @@ function Home() {
                       </div>
                     </div>
                   </div>
-                  <div className={cx("grid-item")}>
+                  <div className={cx("grid-item", "opa0")}>
                     <div className={cx("layout-card")}>
                       <div className={cx("top-card")}>
                         <Link to="/product" className={cx("link-card")}>
@@ -374,7 +374,7 @@ function Home() {
                       </div>
                     </div>
                   </div>
-                  <div className={cx("grid-item")}>
+                  <div className={cx("grid-item", "opa0")}>
                     <div className={cx("layout-card")}>
                       <div className={cx("top-card")}>
                         <Link to="/product" className={cx("link-card")}>

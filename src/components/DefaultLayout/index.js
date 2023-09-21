@@ -21,6 +21,11 @@ function DefaultLayout() {
   // }
 
   let temp1 = localStorage.getItem("accessAdmin");
+  if (temp1 == "true") {
+    temp1 = true;
+  } else {
+    temp1 = false;
+  }
 
   useEffect(() => {
     // Check if the 'user' cookie exists

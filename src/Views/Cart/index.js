@@ -148,6 +148,22 @@ function Cart() {
     }
   };
 
+  const deleteOrder = async (orderId) => {
+    try {
+      const orderRef = doc(collectionCart, orderId);
+      await deleteDoc(orderRef);
+      console.log(`Đã xóa đơn hàng với ID: ${orderId}`);
+    } catch (error) {
+      console.error("Lỗi khi xóa đơn hàng:", error);
+    }
+  };
+
+  const handleDeleteOrder = (orderId) => {
+    if (window.confirm("Bạn có chắc chắn muốn xóa đơn hàng này?")) {
+      deleteOrder(orderId);
+    }
+  };
+
   if (cart.length < 1) {
     return (
       <div className={cx("wrapper")}>
@@ -175,6 +191,7 @@ function Cart() {
                 <th>Đơn giá</th>
                 <th>Số lượng</th>
                 <th>Thành tiền</th>
+                <th>Hủy</th>
               </tr>
             </thead>
             <tbody className={cx("body-tb")}>
@@ -211,6 +228,14 @@ function Cart() {
                       style: "currency",
                       currency: "VND",
                     }).format(item.laptopDetails.price * item.quantity)}
+                  </td>
+                  <td>
+                    <button
+                      className="btn btn-danger mg0"
+                      onClick={() => handleDeleteOrder(item.id)}
+                    >
+                      Xóa
+                    </button>
                   </td>
                 </tr>
               ))}

@@ -15,6 +15,7 @@ import {
   where,
   doc,
   getDoc,
+  orderBy,
   getDocs,
   deleteDoc,
   updateDoc,
@@ -121,7 +122,7 @@ function Order() {
           <table className={cx("table-cart")}>
             <thead className={cx("head-tb")}>
               <tr>
-                <th>Order</th>
+                <th>Đơn hàng</th>
                 <th>Mã đơn hàng</th>
                 <th>Ngày tạo đơn hàng</th>
                 <th>Thành tiền</th>

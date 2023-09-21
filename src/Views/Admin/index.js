@@ -1,7 +1,7 @@
 import { app, database } from "../../firebaseConfig.js";
 import { collection, addDoc, onSnapshot } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import "./Admin.css";
 
@@ -21,6 +21,7 @@ function Admin() {
   const [update, setUpdate] = useState(null);
   const [showAddUserModal, setShowAddUserModal] = useState(false);
   const [showAddProductModal, setShowAddProductModal] = useState(false);
+  const navigate = useNavigate();
 
   const auth = getAuth();
 
@@ -205,20 +206,30 @@ function Admin() {
     // console.log(e.target);
   };
 
+  let temp1 = localStorage.getItem("accessAdmin");
+
+  useEffect(() => {
+    if (temp1 == "true") {
+      navigate("/admin");
+    } else {
+      navigate("/");
+    }
+  }, []);
+
   return (
     <div className="container mt-5">
       {loading ? (
-        <p>Loading data...</p>
+        <p>Đang tải dữ liệu...</p>
       ) : (
         <div>
           <Link to="/admin">
-            <h1 className="mb-4">Admin Page</h1>
+            <h1 className="mb-4">Quản trị viên</h1>
           </Link>
           <button className="btn btn-success" onClick={handleAddUserClick}>
-            Add User
+            Thêm người dùng
           </button>
           <button className="btn btn-success" onClick={handleAddProductClick}>
-            Add Product
+            Thêm sản phẩm
           </button>
           {/* Modal để thêm người dùng */}
           <div
@@ -230,7 +241,7 @@ function Admin() {
             <div className="modal-dialog" role="document">
               <div className="modal-content">
                 <div className="modal-header">
-                  <h5 className="modal-title">Add User</h5>
+                  <h5 className="modal-title">Thêm người dùng</h5>
                   <button
                     type="button"
                     className="close"
@@ -255,7 +266,7 @@ function Admin() {
                       />
                     </div>
                     <div className="form-group">
-                      <label htmlFor="password">Password</label>
+                      <label htmlFor="password">Mật khẩu</label>
                       <input
                         type="password"
                         className="form-control"
@@ -266,7 +277,7 @@ function Admin() {
                       />
                     </div>
                     <div className="form-group">
-                      <label htmlFor="age">Age</label>
+                      <label htmlFor="age">Tuổi</label>
                       <input
                         type="text"
                         className="form-control"
@@ -277,7 +288,7 @@ function Admin() {
                       />
                     </div>
                     <div className="form-group">
-                      <label htmlFor="role">Role</label>
+                      <label htmlFor="role">Vai trò</label>
                       <input
                         type="text"
                         className="form-control"
@@ -295,14 +306,14 @@ function Admin() {
                     className="btn btn-secondary"
                     onClick={() => setShowAddUserModal(false)}
                   >
-                    Close
+                    Đóng
                   </button>
                   <button
                     type="button"
                     className="btn btn-primary"
                     onClick={handleAddUser}
                   >
-                    Save changes
+                    Lưu
                   </button>
                 </div>
               </div>
@@ -318,7 +329,7 @@ function Admin() {
             <div className="modal-dialog" role="document">
               <div className="modal-content">
                 <div className="modal-header">
-                  <h5 className="modal-title">Add Product</h5>
+                  <h5 className="modal-title">Thêm sản phẩm</h5>
                   <button
                     type="button"
                     className="close"
@@ -332,7 +343,7 @@ function Admin() {
                   {/* Form để nhập thông tin sản phẩm */}
                   <form>
                     <div className="form-group">
-                      <label htmlFor="name">Name</label>
+                      <label htmlFor="name">Tên</label>
                       <input
                         type="name"
                         className="form-control"
@@ -343,7 +354,7 @@ function Admin() {
                       />
                     </div>
                     <div className="form-group">
-                      <label htmlFor="text">Price</label>
+                      <label htmlFor="text">Giá</label>
                       <input
                         type="price"
                         className="form-control"
@@ -354,7 +365,7 @@ function Admin() {
                       />
                     </div>
                     <div className="form-group">
-                      <label htmlFor="text">Old Price</label>
+                      <label htmlFor="text">Giá cũ</label>
                       <input
                         type="oldPrice"
                         className="form-control"
@@ -365,7 +376,7 @@ function Admin() {
                       />
                     </div>
                     <div className="form-group">
-                      <label htmlFor="brand">Brand</label>
+                      <label htmlFor="brand">Hãng</label>
                       <input
                         type="text"
                         className="form-control"
@@ -376,7 +387,7 @@ function Admin() {
                       />
                     </div>
                     <div className="form-group">
-                      <label htmlFor="cpu">Cpu</label>
+                      <label htmlFor="cpu">Bộ xử lý</label>
                       <input
                         type="text"
                         className="form-control"
@@ -387,7 +398,7 @@ function Admin() {
                       />
                     </div>
                     <div className="form-group">
-                      <label htmlFor="desktop">Desktop</label>
+                      <label htmlFor="desktop">Màn hình</label>
                       <input
                         type="text"
                         className="form-control"
@@ -398,7 +409,7 @@ function Admin() {
                       />
                     </div>
                     <div className="form-group">
-                      <label htmlFor="graphics">Graphics</label>
+                      <label htmlFor="graphics">Đồ họa</label>
                       <input
                         type="text"
                         className="form-control"
@@ -409,7 +420,7 @@ function Admin() {
                       />
                     </div>
                     <div className="form-group">
-                      <label htmlFor="hardware">Hardware</label>
+                      <label htmlFor="hardware">Ổ cứng</label>
                       <input
                         type="text"
                         className="form-control"
@@ -420,7 +431,7 @@ function Admin() {
                       />
                     </div>
                     <div className="form-group">
-                      <label htmlFor="ram">Ram</label>
+                      <label htmlFor="ram">Bộ nhớ tạm</label>
                       <input
                         type="text"
                         className="form-control"
@@ -431,7 +442,7 @@ function Admin() {
                       />
                     </div>
                     <div className="form-group">
-                      <label htmlFor="battery">Battery</label>
+                      <label htmlFor="battery">Pin</label>
                       <input
                         type="text"
                         className="form-control"
@@ -442,7 +453,7 @@ function Admin() {
                       />
                     </div>
                     <div className="form-group">
-                      <label htmlFor="colorCoverage">Color Coverage</label>
+                      <label htmlFor="colorCoverage">Độ phủ màu</label>
                       <input
                         type="text"
                         className="form-control"
@@ -453,7 +464,7 @@ function Admin() {
                       />
                     </div>
                     <div className="form-group">
-                      <label htmlFor="keyTouch">Key Touch</label>
+                      <label htmlFor="keyTouch">Phím bấm</label>
                       <input
                         type="text"
                         className="form-control"
@@ -464,7 +475,7 @@ function Admin() {
                       />
                     </div>
                     <div className="form-group">
-                      <label htmlFor="screenTouch">Screen Touch</label>
+                      <label htmlFor="screenTouch">Cảm ứng màn hình</label>
                       <input
                         type="text"
                         className="form-control"
@@ -475,7 +486,7 @@ function Admin() {
                       />
                     </div>
                     <div className="form-group">
-                      <label htmlFor="memory">Memory</label>
+                      <label htmlFor="memory">Ổ cắm</label>
                       <input
                         type="text"
                         className="form-control"
@@ -486,7 +497,7 @@ function Admin() {
                       />
                     </div>
                     <div className="form-group">
-                      <label htmlFor="year">Year</label>
+                      <label htmlFor="year">Năm</label>
                       <input
                         type="text"
                         className="form-control"
@@ -497,7 +508,7 @@ function Admin() {
                       />
                     </div>
                     <div className="form-group">
-                      <label htmlFor="panel">Panel</label>
+                      <label htmlFor="panel">Tấm nền</label>
                       <input
                         type="text"
                         className="form-control"
@@ -508,7 +519,7 @@ function Admin() {
                       />
                     </div>
                     <div className="form-group">
-                      <label htmlFor="sound">Sound</label>
+                      <label htmlFor="sound">Âm thanh</label>
                       <input
                         type="text"
                         className="form-control"
@@ -519,7 +530,7 @@ function Admin() {
                       />
                     </div>
                     <div className="form-group">
-                      <label htmlFor="system">System</label>
+                      <label htmlFor="system">Hệ thống</label>
                       <input
                         type="text"
                         className="form-control"
@@ -530,7 +541,7 @@ function Admin() {
                       />
                     </div>
                     <div className="form-group">
-                      <label htmlFor="weight">Weight</label>
+                      <label htmlFor="weight">Cân nặng</label>
                       <input
                         type="text"
                         className="form-control"
@@ -541,7 +552,7 @@ function Admin() {
                       />
                     </div>
                     <div className="form-group">
-                      <label htmlFor="imageLink">Image Link</label>
+                      <label htmlFor="imageLink">Đường dẫn ảnh</label>
                       <input
                         type="text"
                         className="form-control"
@@ -559,14 +570,14 @@ function Admin() {
                     className="btn btn-secondary"
                     onClick={() => setShowAddProductModal(false)}
                   >
-                    Close
+                    Đóng
                   </button>
                   <button
                     type="button"
                     className="btn btn-primary"
                     onClick={handleAddProduct}
                   >
-                    Save changes
+                    Lưu
                   </button>
                 </div>
               </div>
@@ -576,9 +587,9 @@ function Admin() {
             <thead>
               <tr>
                 <th>Email</th>
-                <th>Age</th>
-                <th>Role</th>
-                <th>Actions</th>
+                <th>Tuổi</th>
+                <th>Vai trò</th>
+                <th>Hành động</th>
               </tr>
             </thead>
             <tbody>
@@ -620,7 +631,7 @@ function Admin() {
                             className="btn btn-success mg0"
                             onClick={handleSaveClick}
                           >
-                            Save
+                            Lưu
                           </button>
                         </td>
                       </>
@@ -632,13 +643,13 @@ function Admin() {
                           className="btn btn-info btn-sm mr-2"
                           onClick={() => handleEditClick(item)}
                         >
-                          Edit
+                          Sửa
                         </button>
                         <button
                           className="btn btn-danger btn-sm"
                           onClick={() => handleDeleteClick(item.id)}
                         >
-                          Delete
+                          Xóa
                         </button>
                       </>
                     )}

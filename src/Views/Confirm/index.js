@@ -1,9 +1,67 @@
 import classNames from "classnames/bind";
 import styles from "./Confirm.module.scss";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+
+import { app, database } from "../../firebaseConfig.js";
+import {
+  getFirestore,
+  collection,
+  onSnapshot,
+  documentId,
+  query,
+  where,
+  doc,
+  getDoc,
+  getDocs,
+  deleteDoc,
+  updateDoc,
+  addDoc,
+  serverTimestamp,
+} from "firebase/firestore";
 
 const cx = classNames.bind(styles);
 
 function Confirm() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    orderID: id,
+    fullName: "",
+    phone: "",
+    address: "",
+    cccd: "",
+    email: "",
+    timestamp: serverTimestamp(),
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const addInfoToTable = async () => {
+    try {
+      const docRef = await addDoc(collection(database, "confirm"), {
+        ...formData,
+      });
+      const historyRef = await addDoc(collection(database, "orderStatus"), {
+        orderID: id,
+        orderDescription: "are delivering",
+      });
+
+      console.log("Đã thêm thông tin vào bảng với ID: ", docRef.id);
+      console.log("Đã thêm thông tin vào bảng với ID: ", historyRef.id);
+      navigate("/");
+    } catch (error) {
+      console.error("Lỗi khi thêm thông tin vào bảng: ", error);
+    }
+  };
+
   return (
     <div className={cx("wrapper")}>
       <div className={cx("container")}>
@@ -16,12 +74,26 @@ function Confirm() {
             <label className={cx("text-label")} htmlFor="fullName">
               Họ và tên
             </label>
-            <input className={cx("text-input")} placeholder="Nguyen Van A" />
+            <input
+              className={cx("text-input")}
+              placeholder="Nguyen Van A"
+              name="fullName"
+              value={formData.fullName}
+              onChange={handleChange}
+              required
+            />
             <br />
             <label className={cx("text-label")} htmlFor="phone">
               Số điện thoại
             </label>
-            <input className={cx("text-input")} placeholder="0123456789" />
+            <input
+              className={cx("text-input")}
+              placeholder="0123456789"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              required
+            />
             <br />
             <label className={cx("text-label")} htmlFor="address">
               Địa chỉ
@@ -29,12 +101,23 @@ function Confirm() {
             <input
               className={cx("text-input")}
               placeholder="Số nhà, đường, xóm, thôn, xã, huyện, thành phố"
+              name="address"
+              value={formData.address}
+              onChange={handleChange}
+              required
             />
             <br />
             <label className={cx("text-label")} htmlFor="cccd">
               CMND/CCCD
             </label>
-            <input className={cx("text-input")} placeholder="001234567890" />
+            <input
+              className={cx("text-input")}
+              placeholder="001234567890"
+              name="cccd"
+              value={formData.cccd}
+              onChange={handleChange}
+              required
+            />
             <br />
             <label className={cx("text-label")} htmlFor="email">
               Email
@@ -43,6 +126,10 @@ function Confirm() {
               type="email"
               className={cx("text-input")}
               placeholder="google@example.com"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
             />
             <br />
           </form>
@@ -50,7 +137,9 @@ function Confirm() {
 
         <div className={cx("section003")}>
           <div className={cx("submit-btn")}>
-            <button className={cx("confirm-btn")}>Xác nhận</button>
+            <button className={cx("confirm-btn")} onClick={addInfoToTable}>
+              Xác nhận
+            </button>
           </div>
         </div>
       </div>

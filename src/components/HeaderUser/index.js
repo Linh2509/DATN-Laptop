@@ -82,26 +82,26 @@ function HeaderUser({ logout }) {
                   <img className={cx("user-logo")} src={userLogo} alt="" />
                   <Popup trigger={<p className={cx("text")}>{email}</p>}>
                     <div>
-                      <Link className={cx("text")}>User Information</Link>
+                      <Link className={cx("text")}>Thông tin người dùng</Link>
                     </div>
                     <div>
                       <Link
                         to={`/order/${userIDCookie}`}
                         className={cx("text")}
                       >
-                        Order
+                        Đơn hàng
                       </Link>
                     </div>
                     <div>
                       <button onClick={logout} className={cx("text")}>
-                        Logout
+                        Đăng xuất
                       </button>
                     </div>
                   </Popup>
                 </div>
               </div>
               <nav className={cx("navi")}>
-                <Popup trigger={<p className={cx("text")}>Laptop brand</p>}>
+                <Popup trigger={<p className={cx("text")}>Hãng Laptop</p>}>
                   <div>
                     <Link to={`/search?query=MacBook`} className={cx("text")}>
                       MacBook
@@ -174,7 +174,7 @@ function HeaderUser({ logout }) {
                   </div>
                 </Popup>
 
-                <Popup trigger={<p className={cx("text")}>Price</p>}>
+                <Popup trigger={<p className={cx("text")}>Giá</p>}>
                   <div>
                     <Link
                       to={`/search?queryPriceMin=0&queryPriceMax=10000000`}
@@ -217,7 +217,7 @@ function HeaderUser({ logout }) {
                   </div>
                 </Popup>
 
-                <Popup trigger={<p className={cx("text")}>CPU</p>}>
+                <Popup trigger={<p className={cx("text")}>Bộ xử lý</p>}>
                   <div>
                     <Link className={cx("text")}>Intel celeron</Link>
                   </div>
@@ -248,7 +248,7 @@ function HeaderUser({ logout }) {
                 </Popup>
 
                 <Popup
-                  trigger={<p className={cx("text", "hidden")}>Monitor</p>}
+                  trigger={<p className={cx("text", "hidden")}>Màn hình</p>}
                 >
                   <div>
                     <Link className={cx("text")}>Khoảng 13 inch</Link>
@@ -261,7 +261,7 @@ function HeaderUser({ logout }) {
                   </div>
                 </Popup>
 
-                <Popup trigger={<p className={cx("text")}>Ram</p>}>
+                <Popup trigger={<p className={cx("text")}>Bộ nhớ tạm</p>}>
                   <div>
                     <Link className={cx("text")}>4GB</Link>
                   </div>
@@ -276,7 +276,7 @@ function HeaderUser({ logout }) {
                   </div>
                 </Popup>
 
-                <Popup trigger={<p className={cx("text")}>Graphics</p>}>
+                <Popup trigger={<p className={cx("text")}>Đồ họa</p>}>
                   <div>
                     <Link className={cx("text")}>NVIDIA GeForce Series</Link>
                   </div>
@@ -288,9 +288,7 @@ function HeaderUser({ logout }) {
                   </div>
                 </Popup>
 
-                <Popup
-                  trigger={<p className={cx("text", "hidden")}>Hardware</p>}
-                >
+                <Popup trigger={<p className={cx("text", "hidden")}>Ổ cứng</p>}>
                   <div>
                     <Link className={cx("text")}>SSD 128GB</Link>
                   </div>
@@ -307,7 +305,7 @@ function HeaderUser({ logout }) {
 
                 <Popup
                   trigger={
-                    <p className={cx("text", "hidden")}>Special features</p>
+                    <p className={cx("text", "hidden")}>Tính năng đặc biệt</p>
                   }
                 >
                   <div>
