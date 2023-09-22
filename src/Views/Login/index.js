@@ -73,7 +73,7 @@ function Login(props) {
     <div className="login-signup-form animated fadeinDown">
       <div className="form">
         <form onSubmit={onSubmit}>
-          <h1 className="title">Login into your account</h1>
+          <h1 className="title">Đăng nhập tài khoản</h1>
           <input
             ref={emailRef}
             name="email"
@@ -92,7 +92,7 @@ function Login(props) {
             Login
           </button>
           <p className="message">
-            Not Registered? <Link to="/signUp">Create an account</Link>
+            Chưa đăng ký? <Link to="/signUp">Đăng ký</Link>
           </p>
         </form>
       </div>

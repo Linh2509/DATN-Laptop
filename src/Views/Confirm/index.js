@@ -2,6 +2,7 @@ import classNames from "classnames/bind";
 import styles from "./Confirm.module.scss";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 
 import { app, database } from "../../firebaseConfig.js";
 import {
@@ -24,6 +25,9 @@ const cx = classNames.bind(styles);
 
 function Confirm() {
   const { id } = useParams();
+  const userCookie = Cookies.get("userId");
+  const [userInfo, setUserInfo] = useState(null);
+
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -35,6 +39,45 @@ function Confirm() {
     email: "",
     timestamp: serverTimestamp(),
   });
+
+  const getUserInfo = async (userID) => {
+    try {
+      const userRef = doc(database, "users", userID);
+      const userSnapshot = await getDoc(userRef);
+
+      if (userSnapshot.exists()) {
+        const userData = userSnapshot.data();
+        return userData;
+      } else {
+        return null; // Trả về null nếu không tìm thấy người dùng
+      }
+    } catch (error) {
+      // console.error("Lỗi khi lấy thông tin người dùng:", error);
+      return null;
+    }
+  };
+
+  useEffect(() => {
+    getUserInfo();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const userData = await getUserInfo(userCookie);
+      if (userData) {
+        setUserInfo(userData);
+        setFormData({
+          ...formData,
+          fullName: userData.fullName,
+          phone: userData.phone,
+          address: userData.address,
+          cccd: userData.cccd,
+          email: userData.email,
+        });
+      }
+    };
+    fetchData();
+  }, [userCookie]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -51,7 +94,15 @@ function Confirm() {
       });
       const historyRef = await addDoc(collection(database, "orderStatus"), {
         orderID: id,
-        orderDescription: "are delivering",
+        orderDescription: "Đang lấy hàng",
+        userID: userCookie,
+        timestamp: serverTimestamp(),
+      });
+
+      // Cập nhật trạng thái `display` của đơn hàng thành `false`
+      const orderRef = doc(database, "order", id);
+      await updateDoc(orderRef, {
+        display: false,
       });
 
       console.log("Đã thêm thông tin vào bảng với ID: ", docRef.id);

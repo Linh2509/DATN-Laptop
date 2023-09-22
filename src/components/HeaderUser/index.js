@@ -82,7 +82,12 @@ function HeaderUser({ logout }) {
                   <img className={cx("user-logo")} src={userLogo} alt="" />
                   <Popup trigger={<p className={cx("text")}>{email}</p>}>
                     <div>
-                      <Link className={cx("text")}>Thông tin người dùng</Link>
+                      <Link
+                        to={`/users/${userIDCookie}`}
+                        className={cx("text")}
+                      >
+                        Thông tin cá nhân
+                      </Link>
                     </div>
                     <div>
                       <Link

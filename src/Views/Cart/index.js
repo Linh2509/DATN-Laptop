@@ -133,6 +133,7 @@ function Cart() {
         })),
         total: totalAmount,
         timestamp: serverTimestamp(),
+        display: true,
       });
 
       console.log("Đã tạo đơn hàng thành công:", orderRef.id);

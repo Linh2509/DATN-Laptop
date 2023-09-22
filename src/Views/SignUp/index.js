@@ -16,7 +16,6 @@ import { Link, useNavigate } from "react-router-dom";
 function SignUp() {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const ageRef = useRef();
   const passwordConfirmationRef = useRef();
 
   const auth = getAuth();
@@ -46,7 +45,6 @@ function SignUp() {
       addDoc(collectionRef, {
         email: data.email.toLowerCase(),
         password: data.password,
-        age: parseInt(data.age),
         role: false,
       })
         .then(() => {
@@ -112,7 +110,7 @@ function SignUp() {
     <div className="login-signup-form animated fadeinDown">
       <div className="form">
         <form onSubmit={onSubmit}>
-          <h1 className="title">Sign up for free</h1>
+          <h1 className="title">Đăng ký miễn phí</h1>
           <input
             ref={emailRef}
             name="email"
@@ -136,20 +134,13 @@ function SignUp() {
             onChange={(event) => handleInput(event)}
           />
 
-          <input
-            ref={ageRef}
-            name="age"
-            type="number"
-            placeholder="Age"
-            onChange={(event) => handleInput(event)}
-          />
           {/* <Link to="/login"> */}
           <button className="btn btn-block" onClick={handleSubmit}>
             SignUp
           </button>
           {/* </Link> */}
           <p className="message">
-            Already registered? <Link to="/login">Sign in</Link>
+            Đã đăng ký? <Link to="/login">Đăng nhập</Link>
           </p>
         </form>
       </div>

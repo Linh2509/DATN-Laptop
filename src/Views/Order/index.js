@@ -130,46 +130,44 @@ function Order() {
               </tr>
             </thead>
             <tbody className={cx("body-tb")}>
-              {orders.map((item) => (
-                <tr key={item.id}>
-                  <td>
-                    <img className={cx("cover-img")} src={logo} alt="" />
-                  </td>
-                  <td className={cx("break", "name-column")}>{item.id}</td>
-                  <td>
-                    {item.timestamp
-                      ? new Intl.DateTimeFormat("vi-VN", {
-                          year: "numeric",
-                          month: "numeric",
-                          day: "numeric",
-                          hour: "numeric",
-                          minute: "numeric",
-                          second: "numeric",
-                        }).format(item.timestamp.toDate())
-                      : "Không có dữ liệu thời gian"}
-                  </td>
-                  <td>
-                    {new Intl.NumberFormat("vi-VN", {
-                      style: "currency",
-                      currency: "VND",
-                    }).format(item.total)}
-                  </td>
-                  <td>
-                    <button
-                      className="btn btn-success mg0"
-                      onClick={() => handleViewDetail(item)}
-                    >
-                      Xem chi tiết
-                    </button>
-                    <button
-                      className="btn btn-danger mg0"
-                      onClick={() => handleDeleteOrder(item.id)}
-                    >
-                      Xóa
-                    </button>
-                  </td>
-                </tr>
-              ))}
+              {orders.map(
+                (item) =>
+                  item.display && (
+                    <tr key={item.id}>
+                      <td>
+                        <img className={cx("cover-img")} src={logo} alt="" />
+                      </td>
+                      <td className={cx("break", "name-column")}>{item.id}</td>
+                      <td>
+                        {item.timestamp
+                          ? new Date(
+                              item.timestamp.seconds * 1000
+                            ).toLocaleString()
+                          : "Không có dữ liệu thời gian"}
+                      </td>
+                      <td>
+                        {new Intl.NumberFormat("vi-VN", {
+                          style: "currency",
+                          currency: "VND",
+                        }).format(item.total)}
+                      </td>
+                      <td>
+                        <button
+                          className="btn btn-success mg0"
+                          onClick={() => handleViewDetail(item)}
+                        >
+                          Xem chi tiết
+                        </button>
+                        <button
+                          className="btn btn-danger mg0"
+                          onClick={() => handleDeleteOrder(item.id)}
+                        >
+                          Xóa
+                        </button>
+                      </td>
+                    </tr>
+                  )
+              )}
             </tbody>
           </table>
         </div>

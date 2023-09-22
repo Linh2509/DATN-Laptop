@@ -57,7 +57,7 @@ const router = createBrowserRouter([
         element: <SearchProduct />,
       },
       {
-        path: "/users",
+        path: "/users/:id",
         element: <Users />,
       },
       {
