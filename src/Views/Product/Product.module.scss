@@ -4,6 +4,11 @@
     max-height: 400px;
 }
 
+.avatar-img{
+    width: 60px;
+    height: 60px;
+}
+
 .text-link {
     color: #f8f9fa;
     font-size: 18px;
@@ -210,6 +215,22 @@
                         }
                     }
                 }
+            }
+        }
+    }
+}
+
+.section003 {
+    margin-top: 1rem;
+    display: flex;
+    
+    .feedback{
+        .title-feedback {
+            .name {
+                font-weight: bold;
+                color: #212529;
+                line-height: 32px;
+                font-size: 24px;
             }
         }
     }

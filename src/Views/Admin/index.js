@@ -28,7 +28,6 @@ function Admin() {
   const [newUser, setNewUser] = useState({
     email: "",
     password: "",
-    age: "",
     role: "",
   });
 
@@ -101,7 +100,7 @@ function Admin() {
     createUserWithEmailAndPassword(auth, newUser.email, newUser.password)
       .then(() => {
         console.log("User added successfully!");
-        setNewUser({ email: "", password: "", age: "", role: "" });
+        setNewUser({ email: "", password: "", role: "" });
         setShowAddUserModal(false);
       })
       .catch((error) => {
@@ -110,7 +109,6 @@ function Admin() {
     addDoc(collectionRef, {
       email: newUser.email.toLowerCase(),
       password: newUser.password,
-      age: parseInt(newUser.age),
       role: false,
     })
       .then(() => {
@@ -145,6 +143,7 @@ function Admin() {
       system: newProduct.system,
       weight: newProduct.weight,
       imageLink: newProduct.imageLink,
+      display: 1,
     })
       .then(() => {
         setShowAddProductModal(false);
@@ -158,7 +157,6 @@ function Admin() {
   const handleEditClick = (user) => {
     setEditingUser(user);
     setUpdate(user);
-    console.log("ED");
   };
 
   const handleSaveClick = () => {
@@ -169,7 +167,6 @@ function Admin() {
     const docToUpdate = doc(database, "users", update.id);
     updateDoc(docToUpdate, {
       email: update.email,
-      age: update.age,
       role: update.role,
     })
       .then(() => {
@@ -181,7 +178,6 @@ function Admin() {
     // database.collection("users").doc(id).set(updatedUserData);
     setEditingUser(null);
     setUpdate(null);
-    // console.log("SAVING2");
   };
 
   const deleteUser = (id) => {
@@ -209,7 +205,7 @@ function Admin() {
   let temp1 = localStorage.getItem("accessAdmin");
 
   useEffect(() => {
-    if (temp1 == "true") {
+    if (temp1 == "admin") {
       navigate("/admin");
     } else {
       navigate("/");
@@ -231,6 +227,13 @@ function Admin() {
           <button className="btn btn-success" onClick={handleAddProductClick}>
             Thêm sản phẩm
           </button>
+          <Link to="/admin/product">
+            <button className="btn btn-success">Danh sách sản phẩm</button>
+          </Link>
+          <Link to="/admin/ordered">
+            <button className="btn btn-success">Danh sách đơn hàng</button>
+          </Link>
+
           {/* Modal để thêm người dùng */}
           <div
             className={`modal ${showAddUserModal ? "show" : ""}`}
@@ -274,17 +277,6 @@ function Admin() {
                         value={newUser.password}
                         onChange={handleInputChange1}
                         name="password"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="age">Tuổi</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="age"
-                        value={newUser.age}
-                        onChange={handleInputChange1}
-                        name="age"
                       />
                     </div>
                     <div className="form-group">
@@ -587,7 +579,6 @@ function Admin() {
             <thead>
               <tr>
                 <th>Email</th>
-                <th>Tuổi</th>
                 <th>Vai trò</th>
                 <th>Hành động</th>
               </tr>
@@ -598,7 +589,6 @@ function Admin() {
                   {!update && (
                     <>
                       <td className="w100">{item.email}</td>
-                      <td className="w100">{item.age}</td>
                       <td className="w100">{item.role}</td>
                     </>
                   )}
@@ -611,13 +601,6 @@ function Admin() {
                             type="text"
                             name="email"
                             value={update.email}
-                            onChange={handleInputChange}
-                          />
-                          <input
-                            className="w100"
-                            type="text"
-                            name="age"
-                            value={update.age}
                             onChange={handleInputChange}
                           />
                           <input

@@ -14,6 +14,10 @@ import Admin from "./Views/Admin";
 import SearchProduct from "./Views/SearchProduct";
 import Order from "./Views/Order";
 import HistoryOrder from "./Views/HistoryOrder";
+import ListProduct from "./Views/ListProduct";
+import EditProduct from "./Views/EditProduct";
+import ListOrdered from "./Views/ListOrdered";
+import EditOrder from "./Views/EditOrder";
 
 const router = createBrowserRouter([
   {
@@ -67,7 +71,22 @@ const router = createBrowserRouter([
       {
         path: "/admin",
         element: <Admin />,
-        children: [{}],
+      },
+      {
+        path: "/admin/product",
+        element: <ListProduct />,
+      },
+      {
+        path: "/admin/product/:id/edit",
+        element: <EditProduct />,
+      },
+      {
+        path: "/admin/ordered",
+        element: <ListOrdered />,
+      },
+      {
+        path: "/admin/ordered/edit/:id",
+        element: <EditOrder />,
       },
     ],
   },

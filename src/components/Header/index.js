@@ -8,15 +8,18 @@ import userLogo from "../../assets/User.png";
 import "reactjs-popup/dist/index.css";
 import Popup from "reactjs-popup";
 import Cookies from "js-cookie";
+import { useState } from "react";
 
 const cx = classNames.bind(styles);
 
 function Header() {
   const navigate = useNavigate();
   const userCookie = Cookies.get("userId");
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    navigate(`/search?query=${searchTerm}`);
   };
 
   const checkLogin = () => {
@@ -41,11 +44,22 @@ function Header() {
               <div className={cx("search")}>
                 <input
                   className={cx("search-input")}
-                  placeholder="Search name laptop you want..."
+                  placeholder="Tìm kiếm sản phẩm bạn muốn..."
                   spellCheck={false}
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
                 />
                 <button className={cx("search-btn")} onClick={handleSubmit}>
-                  <img className={cx("search-logo")} src={searchLogo} alt="" />
+                  <Link
+                    to={`/search?query=${searchTerm}`}
+                    className={cx("search-btn")}
+                  >
+                    <img
+                      className={cx("search-logo")}
+                      src={searchLogo}
+                      alt=""
+                    />
+                  </Link>
                 </button>
               </div>
               <div className={cx("cart")}>
@@ -61,64 +75,117 @@ function Header() {
             <nav className={cx("navi")}>
               <Popup trigger={<p className={cx("text")}>Hãng Laptop</p>}>
                 <div>
-                  <Link className={cx("text")}>MacBook</Link>
+                  <Link to={`/search?query=MacBook`} className={cx("text")}>
+                    MacBook
+                  </Link>
                 </div>
                 <div>
-                  <Link className={cx("text")}>HP</Link>
+                  <Link to={`/search?query=HP`} className={cx("text")}>
+                    HP
+                  </Link>
                 </div>
                 <div>
-                  <Link className={cx("text")}>DELL</Link>
+                  <Link to={`/search?query=DELL`} className={cx("text")}>
+                    DELL
+                  </Link>
                 </div>
                 <div>
-                  <Link className={cx("text")}>ASUS</Link>
+                  <Link to={`/search?query=ASUS`} className={cx("text")}>
+                    ASUS
+                  </Link>
                 </div>
                 <div>
-                  <Link className={cx("text")}>Lenovo</Link>
+                  <Link to={`/search?query=Lenovo`} className={cx("text")}>
+                    Lenovo
+                  </Link>
                 </div>
                 <div>
-                  <Link className={cx("text")}>Acer</Link>
+                  <Link to={`/search?query=Acer`} className={cx("text")}>
+                    Acer
+                  </Link>
                 </div>
                 <div>
-                  <Link className={cx("text")}>Xiaomi</Link>
+                  <Link to={`/search?query=Xiaomi`} className={cx("text")}>
+                    Xiaomi
+                  </Link>
                 </div>
                 <div>
-                  <Link className={cx("text")}>Microsoft Surface</Link>
+                  <Link to={`/search?query=Microsoft`} className={cx("text")}>
+                    Microsoft Surface
+                  </Link>
                 </div>
                 <div>
-                  <Link className={cx("text")}>LG</Link>
+                  <Link to={`/search?query=LG`} className={cx("text")}>
+                    LG
+                  </Link>
                 </div>
                 <div>
-                  <Link className={cx("text")}>HUAWEI</Link>
+                  <Link to={`/search?query=HUAWEI`} className={cx("text")}>
+                    HUAWEI
+                  </Link>
                 </div>
                 <div>
-                  <Link className={cx("text")}>MSI</Link>
+                  <Link to={`/search?query=MSI`} className={cx("text")}>
+                    MSI
+                  </Link>
                 </div>
                 <div>
-                  <Link className={cx("text")}>GIGABYTE</Link>
+                  <Link to={`/search?query=GIGABYTE`} className={cx("text")}>
+                    GIGABYTE
+                  </Link>
                 </div>
                 <div>
-                  <Link className={cx("text")}>Fujitsu</Link>
+                  <Link to={`/search?query=Fujitsu`} className={cx("text")}>
+                    Fujitsu
+                  </Link>
                 </div>
                 <div>
-                  <Link className={cx("text")}>Intel</Link>
+                  <Link to={`/search?query=Intel`} className={cx("text")}>
+                    Intel
+                  </Link>
                 </div>
               </Popup>
 
               <Popup trigger={<p className={cx("text")}>Giá</p>}>
                 <div>
-                  <Link className={cx("text")}>Dưới 10 triệu</Link>
+                  <Link
+                    to={`/search?queryPriceMin=0&queryPriceMax=10000000`}
+                    className={cx("text")}
+                  >
+                    Dưới 10 triệu
+                  </Link>
                 </div>
                 <div>
-                  <Link className={cx("text")}>Từ 10-15 triệu</Link>
+                  <Link
+                    to={`/search?queryPriceMin=10000000&queryPriceMax=15000000`}
+                    className={cx("text")}
+                  >
+                    Từ 10-15 triệu
+                  </Link>
                 </div>
                 <div>
-                  <Link className={cx("text")}>Từ 15-20 triệu</Link>
+                  <Link
+                    to={`/search?queryPriceMin=15000000&queryPriceMax=20000000`}
+                    className={cx("text")}
+                  >
+                    Từ 15-20 triệu
+                  </Link>
                 </div>
                 <div>
-                  <Link className={cx("text")}>Từ 20-25 triệu</Link>
+                  <Link
+                    to={`/search?queryPriceMin=20000000&queryPriceMax=25000000`}
+                    className={cx("text")}
+                  >
+                    Từ 20-25 triệu
+                  </Link>
                 </div>
                 <div>
-                  <Link className={cx("text")}>Trên 25 triệu</Link>
+                  <Link
+                    to={`/search?queryPriceMin=25000000&queryPriceMax=2000000000000000`}
+                    className={cx("text")}
+                  >
+                    Trên 25 triệu
+                  </Link>
                 </div>
               </Popup>
 

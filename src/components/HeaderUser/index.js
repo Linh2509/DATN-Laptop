@@ -55,7 +55,7 @@ function HeaderUser({ logout }) {
                 <div className={cx("search")}>
                   <input
                     className={cx("search-input")}
-                    placeholder="Search name laptop you want..."
+                    placeholder="Tìm kiếm sản phẩm bạn muốn..."
                     spellCheck={false}
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}

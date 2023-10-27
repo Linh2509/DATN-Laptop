@@ -1,0 +1,20 @@
+.star-container {
+    display: inline-block;
+    font-size: 24px;
+}
+
+.fa-star {
+    color: #ddd;
+    /* Màu sao không được chọn */
+    cursor: pointer;
+}
+
+.fa-star.checked {
+    color: #ffc107;
+    /* Màu sao đã chọn */
+}
+
+.fa-star:hover {
+    color: #f7d71d;
+    /* Màu hover */
+}

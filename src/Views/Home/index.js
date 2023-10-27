@@ -174,7 +174,7 @@ function Home() {
                       </Link>
                     </div>
                   ))}
-                  <div className={cx("grid-item", "opa0")}>
+                  {/* <div className={cx("grid-item", "opa0")}>
                     <div className={cx("layout-card")}>
                       <div className={cx("top-card")}>
                         <Link to="/product" className={cx("link-card")}>
@@ -473,7 +473,7 @@ function Home() {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

@@ -7,6 +7,7 @@ import hddLogo from "../../assets/Hdd.png";
 import graphicsLogo from "../../assets/Graphics.png";
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import "./Product.css";
 
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -29,10 +30,15 @@ const cx = classNames.bind(styles);
 function Product() {
   const { id } = useParams();
   const [product, setProduct] = useState([]);
+  const [userRating, setUserRating] = useState(5);
+  const [hoveredRating, setHoveredRating] = useState(null);
+  const [comment, setComment] = useState("");
+  const [comments, setComments] = useState([]);
 
   const navigate = useNavigate();
 
   const userCookie = Cookies.get("userId");
+  const emailCookie = Cookies.get("email");
 
   const collectionProduct = collection(database, "laptops");
   const productQuery = query(collectionProduct, where(documentId(), "==", id));
@@ -143,6 +149,22 @@ function Product() {
             });
         }
       });
+    }
+  };
+
+  const handleStarHover = (rating) => {
+    setUserRating(rating);
+  };
+
+  const handleStarClick = (rating) => {
+    console.log(`Bạn đã chọn rating: ${rating}`);
+    setUserRating(rating);
+  };
+
+  const handleAddComment = () => {
+    if (comment.trim() !== "") {
+      setComments([...comments, comment]);
+      setComment("");
     }
   };
 
@@ -350,6 +372,83 @@ function Product() {
                       </div>
                     </button>
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className={cx("section003")}>
+          <div className={cx("feedback")}>
+            <div className={cx("title-feedback")}>
+              <h3 className={cx("name")}>Đánh giá & nhận xét {product.name}</h3>
+            </div>
+            <div className={cx("body-feedback")}>
+              <h2>Star Rating</h2>
+              <div className="star-container">
+                {[1, 2, 3, 4, 5].map((rating) => (
+                  <span
+                    key={rating}
+                    className={`fa fa-star ${
+                      rating <= userRating ? "checked" : ""
+                    }`}
+                    onMouseEnter={() => setHoveredRating(rating)}
+                    onMouseLeave={() => setHoveredRating(null)}
+                    onClick={() => handleStarClick(rating)}
+                  />
+                ))}
+              </div>
+              <h2>Feedback</h2>
+              <div className={cx("comment-section")}>
+                <div
+                  className={cx("input-button")}
+                  style={{ display: "flex", width: "100%" }}
+                >
+                  <textarea
+                    className={cx("comment-input")}
+                    style={{ width: "70%", marginRight: "50px" }}
+                    placeholder="Thêm bình luận..."
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                  />
+                  <button
+                    className={cx("comment-button")}
+                    onClick={handleAddComment}
+                    style={{
+                      background: "green",
+                      color: "#FFF",
+                      borderRadius: "5px",
+                      width: "20%",
+                    }}
+                  >
+                    Thêm bình luận
+                  </button>
+                </div>
+                <div className={cx("comment-list")}>
+                  {comments.map((c, index) => (
+                    <div key={index} className={cx("comment-item")}>
+                      <div
+                        className={cx("avatar")}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          marginBottom: "1rem",
+                          marginTop: "1rem",
+                        }}
+                      >
+                        <img
+                          src="https://vnn-imgs-a1.vgcloud.vn/image1.ictnews.vn/_Files/2020/03/17/trend-avatar-1.jpg"
+                          className={cx("avatar-img")}
+                          alt=""
+                          style={{ marginRight: "10px" }}
+                        />
+                        <div>
+                          <p>{emailCookie}</p>
+                          <div className={cx("comment-text")}>{c}</div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>

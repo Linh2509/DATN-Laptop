@@ -50,7 +50,7 @@ function Login(props) {
 
           localStorage.setItem("accessAdmin", dataUser[0].role);
           const temp = localStorage.getItem("accessAdmin");
-          if (temp == "true") {
+          if (temp == "admin") {
             navigate("/admin");
           } else {
             navigate("/");

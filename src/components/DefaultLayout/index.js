@@ -13,15 +13,8 @@ function DefaultLayout() {
 
   const navigate = useNavigate();
 
-  // let temp = localStorage.getItem("accessAdmin");
-  // if (temp == "true") {
-  //   temp = "true";
-  // } else {
-  //   temp = null;
-  // }
-
   let temp1 = localStorage.getItem("accessAdmin");
-  if (temp1 == "true") {
+  if (temp1 == "admin") {
     temp1 = true;
   } else {
     temp1 = false;

@@ -45,7 +45,7 @@ function SignUp() {
       addDoc(collectionRef, {
         email: data.email.toLowerCase(),
         password: data.password,
-        role: false,
+        role: "false",
       })
         .then(() => {
           alert("Data Added");

@@ -1,6 +1,7 @@
 {
   "projects": {
-    "react-firebase-pramatic": "laptop-49fff"
+    "react-firebase-pramatic": "laptop-49fff",
+    "default": "laptop-49fff"
   },
   "targets": {},
   "etags": {}
